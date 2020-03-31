@@ -26,6 +26,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Proyecto</th>
+                            <th>Cliente</th>
                             <th>Unidades</th>
                             <th>Acciones</th>
                         </tr>
@@ -39,6 +40,7 @@
                                     </a>
                                 </td>
                                 <td>{{ $variable->project->name }}</td>
+                                <td>{{ $variable->project->client->name }}</td>
                                 <td>{{ $variable->units }}</td>
                                 <td>
                                     <p>

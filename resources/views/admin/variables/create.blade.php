@@ -39,7 +39,7 @@
                             <select class="form-control" required name="project_id">
                                 <option selected="" disabled="">Selecciona un proyecto</option>
                                 @foreach ($projects as $key => $project)
-                                    <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                    <option value="{{ $project->id }}">{{ $project->name }} - {{ $project->client->name }}</option>
                                 @endforeach
                             </select>
                         </div>

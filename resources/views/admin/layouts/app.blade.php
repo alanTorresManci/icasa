@@ -126,14 +126,14 @@
 				<!-- begin sidebar nav -->
 				<ul class="nav">
                     @if (\Auth::user()->isAn('admin'))
-                        <li class="{{ $section == "admin_projects" ? "active" : "" }}">
-                            <a href="{{ route('admin_projects.index') }}">
-                                <i class="fa fa-clipboard"></i> <span>Proyectos</span>
-                            </a>
-                        </li>
                         <li class="{{ $section == "clients" ? "active" : "" }}">
                             <a href="{{ route('clients.index') }}">
                                 <i class="fa fa-user"></i> <span>Clientes</span>
+                            </a>
+                        </li>
+                        <li class="{{ $section == "admin_projects" ? "active" : "" }}">
+                            <a href="{{ route('admin_projects.index') }}">
+                                <i class="fa fa-clipboard"></i> <span>Proyectos</span>
                             </a>
                         </li>
                         <li class="{{ $section == "variables" ? "active" : "" }}">
