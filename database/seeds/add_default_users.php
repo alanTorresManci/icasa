@@ -17,12 +17,12 @@ class add_default_users extends Seeder
         $user = DB::table('users')->insert([
             'email' => 'admin@icasa.com.mx',
             'name' => 'Admin',
-            'password' => 'admin',
+            'password' => \Hash::make('admin'),
         ]);
         $user = DB::table('users')->insert([
             'email' => 'cliente@icasa.com.mx',
             'name' => 'Cliente 1',
-            'password' => 'cliente',
+            'password' => \Hash::make('cliente'),
         ]);
         // $admin = Bouncer::role()->firstOrCreate([
         //     'name' => 'admin',
