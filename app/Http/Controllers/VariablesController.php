@@ -60,7 +60,7 @@ class VariablesController extends Controller
         ];
         $request->validate($rules);
         $variable = Variable::create($request->all());
-        return redirect()->route('variables.show', $variable);
+        return redirect()->route('variables.create');
     }
 
     /**
