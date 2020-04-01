@@ -67,10 +67,12 @@ class ProjectsController extends Controller
             $database = $firebase->getDatabase();
             foreach ($project->variables as $variable) {
                 $values = $database->getReference($variable->reference)->getSnapshot()->getValue();
-                $variable->data()->create([
-                    'variable_id' => $variable->id,
-                    'value' => $values[$variable->name],
-                ]);
+                if ($values) {
+                    $variable->data()->create([
+                        'variable_id' => $variable->id,
+                        'value' => $values[$variable->name],
+                    ]);
+                }
             }
 
         } catch (Exception $e) {
