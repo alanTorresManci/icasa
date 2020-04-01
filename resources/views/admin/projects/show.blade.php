@@ -40,7 +40,7 @@
                                     <form class="form-horizontal" action="index.html" method="post">
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <input {{ $variable->write_only ? "":"disabled" }} type="text" class="form-control" name="" value="">
+                                                <input {{ $variable->write_only ? "":"disabled" }} type="text" class="form-control" name="" value="{{ $variable->data->last()->value }}">
                                             </div>
                                         </div>
                                     </form>

@@ -28,6 +28,7 @@
                             <th>Proyecto</th>
                             <th>Cliente</th>
                             <th>Unidades</th>
+                            <th>Equipo</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                                 <td>{{ $variable->project->name }}</td>
                                 <td>{{ $variable->project->client->name }}</td>
                                 <td>{{ $variable->units }}</td>
+                                <td>{{ $variable->reference }}</td>
                                 <td>
                                     <p>
                                         <a class="btn btn-danger btn-icon btn-circle btn-sm delete" product="{{ $variable->id }}">

@@ -56,6 +56,17 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-md-3 control-label">Referencia de equipo</label>
+                        <div class="col-md-9">
+                            <input
+                                data-parsley-type="text"
+                                required
+                                class="form-control"
+                                placeholder="Referencia de equipo"
+                                name="reference">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-3 control-label">En vivo</label>
                         <div class="col-md-1">
                             <input id="live" type="checkbox" class="form-control" value="0">

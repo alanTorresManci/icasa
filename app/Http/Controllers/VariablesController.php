@@ -55,6 +55,7 @@ class VariablesController extends Controller
             'project_id' => 'required|exists:projects,id',
             'units' => 'required|string',
             'live' => 'required|boolean',
+            'reference' => 'required|string',
             'write_only' => 'required|boolean',
             'read_only' => 'required|boolean',
         ];
@@ -108,6 +109,7 @@ class VariablesController extends Controller
             'project_id' => 'required|exists:projects,id',
             'units' => 'required|string',
             'live' => 'required|boolean',
+            'reference' => 'required|string',
             'write_only' => 'required|boolean',
             'read_only' => 'required|boolean',
         ];

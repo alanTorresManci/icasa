@@ -19,6 +19,7 @@ Route::get('prueba', function(Illuminate\Http\Request $request){
     return json_encode(['status' => 'recibidio', 'code' => 200]);
 });
 
+// Route::get('/phpfirebase_sdk','FirebaseController@index');
 
 Route::middleware('auth')->group(function() {
     Route::resource('admin_projects', 'AdminProjectsController')->middleware('admin');
