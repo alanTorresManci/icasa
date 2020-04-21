@@ -68,7 +68,7 @@ class ProjectsController extends Controller
                                     ->createFirestore();
             $database = $firebase->database();
             $collection = $database->collection('Notebook');
-            // ->document('1j1FUqDWNKNQN3cy4nED')->snapshot()->data();
+            dd($collection);
             foreach ($project->variables as $variable) {
                 $values = $collection->document($variable->reference)->snapshot()->data();
                 if ($values) {
