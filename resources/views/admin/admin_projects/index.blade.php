@@ -37,7 +37,7 @@
                                         {{ $project->name }}
                                     </a>
                                 </td>
-                                <td>{{ $project->client->name }}</td>
+                                <td>{{ @optional($project->client)->name }}</td>
                                 <td>
                                     <p>
                                         <a class="btn btn-danger btn-icon btn-circle btn-sm delete" product="{{ $project->id }}">

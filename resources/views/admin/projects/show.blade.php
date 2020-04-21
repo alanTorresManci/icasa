@@ -40,7 +40,7 @@
                                     <form class="form-horizontal" action="index.html" method="post">
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <input {{ $variable->write_only ? "":"disabled" }} type="text" class="form-control" name="" value="{{ $variable->data->last()->value }}">
+                                                <input id="value_{{ $variable->id }}" {{ $variable->write_only == 1 ? "" : "disabled" }} type="text" class="form-control" name="" value="{{ $variable->data->last()->value }}">
                                             </div>
                                         </div>
                                     </form>
@@ -48,6 +48,17 @@
                                 <td>{{ $variable->units }}</td>
                                 <td>
                                     <p>
+                                        @if($variable->write_only == 1)
+                                            <a class="btn btn-primary btn-icon btn-circle btn-sm edit" product="{{ $variable->id }}">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <form style="Display: none;" id="form_{{ $variable->id }}" action="{{ route('projects.update', $project->id) }}" method="post">
+                                                {{ csrf_field() }}
+                                                <input id="update_val_{{ $variable->id }}" type="hidden" name="value" value="">
+                                                <input type="hidden" name="variable_id" value="{{ $variable->id }}">
+                                                <input type="hidden" name="_method" value="PUT">
+                                            </form>
+                                        @endif
                                         <a class="btn btn-danger btn-icon btn-circle btn-sm delete" product="{{ $variable->id }}">
                                             <i class="fa fa-times"></i>
                                         </a>
@@ -70,6 +81,25 @@
     <script type="text/javascript">
         $('#data-table').DataTable({
             responsive: true
+        });
+        $('.edit').click(function(){
+            var id = $(this).attr('product');
+            var form = $('#form_'+id);
+            var value = $('#value_'+id).val();
+            $('#update_val_'+id).val(value);
+            swal({
+                title: '¿Seguro?',
+                text: "Se cambiará el valor de la variable",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: "Cancelar",
+                confirmButtonText: 'Si, cambiar'
+            }).then(function () {
+                form.submit();
+            })
+
         });
         $('.delete').click(function(){
             var user = $(this).attr('product');

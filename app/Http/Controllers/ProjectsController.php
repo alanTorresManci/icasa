@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Variable;
 use Illuminate\Http\Request;
 use Kreait\Firebase;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\ServiceAccount;
 use Kreait\Firebase\Database;
+use Kreait\Firebase\Firestore;
 
 class ProjectsController extends Controller
 {
@@ -62,11 +64,13 @@ class ProjectsController extends Controller
             $serviceAccount = ServiceAccount::fromJsonFile(config('constants.firebase.key'));
 
             $firebase = (new Factory)->withServiceAccount($serviceAccount)
-            ->withDatabaseUri(config('constants.firebase.database_read'))
-            ->create();
-            $database = $firebase->getDatabase();
+                                    // ->withDatabaseUri(config('constants.firebase.database_read'))
+                                    ->createFirestore();
+            $database = $firebase->database();
+            $collection = $database->collection('Notebook');
+            // ->document('1j1FUqDWNKNQN3cy4nED')->snapshot()->data();
             foreach ($project->variables as $variable) {
-                $values = $database->getReference($variable->reference)->getSnapshot()->getValue();
+                $values = $collection->document($variable->reference)->snapshot()->data();
                 if ($values) {
                     $variable->data()->create([
                         'variable_id' => $variable->id,
@@ -107,6 +111,25 @@ class ProjectsController extends Controller
     public function update(Request $request, Project $project)
     {
         //
+        try {
+            $serviceAccount = ServiceAccount::fromJsonFile(config('constants.firebase.key'));
+
+            $firebase = (new Factory)->withServiceAccount($serviceAccount)
+
+                                    ->createFirestore();
+            $database = $firebase->database();
+            $collection = $database->collection('Notebook');
+            $variable = Variable::findOrFail($request->variable_id);
+            $doc = $collection->document($variable->reference);
+            $values = $doc->snapshot()->data();
+            $values[$variable->name] = $request->value;
+            $doc->set($values);
+            // dd($doc);
+
+        } catch (Exception $e) {
+
+        }
+        return back();
     }
 
     /**
