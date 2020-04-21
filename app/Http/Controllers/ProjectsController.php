@@ -61,7 +61,7 @@ class ProjectsController extends Controller
     {
         //
         try {
-            $serviceAccount = ServiceAccount::fromJsonFile(config('constants.firebase.key'));
+            $serviceAccount = \ServiceAccount::fromJsonFile(config('constants.firebase.key'));
 
             $firebase = (new Factory)->withServiceAccount($serviceAccount)
                                     // ->withDatabaseUri(config('constants.firebase.database_read'))
@@ -131,7 +131,7 @@ class ProjectsController extends Controller
         }
         return back();
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
