@@ -70,7 +70,7 @@ class ProjectsController extends Controller
             $collection = $database->collection('Notebook');
             // dd($collection);
             foreach ($project->variables as $variable) {
-                dd($collection->document($variable->reference), $variable->reference);
+                // dd($collection->document($variable->reference), $variable->reference);
                 $values = $collection->document($variable->reference)->snapshot()->data();
                 if ($values) {
                     $variable->data()->create([
