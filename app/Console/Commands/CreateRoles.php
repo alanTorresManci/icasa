@@ -55,6 +55,7 @@ class CreateRoles extends Command
         ]);
         $bar->advance();
         $user = User::find(1);
+        $user->assign('admin');
         $bar->advance();
         $user = User::find(2);
         $bar->advance();

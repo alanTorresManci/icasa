@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'read_only' => 1,
             'write_only' => 0,
             'units' => "kW",
+            'reference' => uniqid()
         ]);
     }
 }

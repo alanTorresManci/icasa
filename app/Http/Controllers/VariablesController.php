@@ -18,9 +18,11 @@ class VariablesController extends Controller
     {
         //
         $variables = Variable::all();
-        return view('admin.variables.index')
+        $projects = Project::all();
+        return view('admin.variables.project_selector')
                 ->with([
                     'variables' => $variables,
+                    'projects' => $projects,
                     'section' => 'variables'
                 ]);
     }
@@ -58,10 +60,12 @@ class VariablesController extends Controller
             'reference' => 'required|string',
             'write_only' => 'required|boolean',
             'read_only' => 'required|boolean',
+            'position_x' => 'required',
+            'position_y' => 'required',
         ];
         $request->validate($rules);
         $variable = Variable::create($request->all());
-        return redirect()->route('variables.create');
+        return redirect()->route('variables.show', $request->project_id);
     }
 
     /**
@@ -73,12 +77,11 @@ class VariablesController extends Controller
     public function show($id)
     {
         //
-        $variable = Variable::findOrFail($id);
-        $projects = Project::all();
+        // $variable = Variable::findOrFail($id);
+        $project = Project::findOrFail($id);
         return view('admin.variables.show')
                 ->with([
-                    'variable' => $variable,
-                    'projects' => $projects,
+                    'project' => $project,
                     'section' => 'variables',
                 ]);
     }

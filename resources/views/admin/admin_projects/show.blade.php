@@ -47,6 +47,23 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-md-3 control-label">Imagen</label>
+                        <div class="col-md-9">
+                            <img style="height: 500px" class="form-control" src="{{ \Storage::url($project->image) }}" alt="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Nueva Imagen</label>
+                        <div class="col-md-9">
+                            <input
+                                data-parsley-type="image"
+                                class="form-control"
+                                type="file"
+                                accept="image/*"
+                                name="image">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-3 control-label">Guardar</label>
                         <div class="col-md-9">
                             <button type="submit" class="btn btn-sm btn-success">Guardar Proyecto</button>

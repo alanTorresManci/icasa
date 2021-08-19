@@ -59,7 +59,7 @@ class ProjectsController extends Controller
      */
     public function show(Project $project)
     {
-        //
+
         try {
             $serviceAccount = ServiceAccount::fromJsonFile(config('constants.firebase.key'));
 
@@ -68,7 +68,6 @@ class ProjectsController extends Controller
                                     ->createFirestore();
             $database = $firebase->database();
             $collection = $database->collection('Notebook');
-            // dd($collection);
             foreach ($project->variables as $variable) {
                 // dd($collection->document($variable->reference), $variable->reference);
                 $values = $collection->document($variable->reference)->snapshot()->data();
@@ -84,7 +83,7 @@ class ProjectsController extends Controller
 
         }
 
-        return view('admin.projects.show')
+        return view('admin.projects.showV2')
                 ->with([
                     'section' => 'projects',
                     'project' => $project,

@@ -15,7 +15,7 @@ class AddReferenceToVariablesTable extends Migration
     {
         Schema::table('variables', function (Blueprint $table) {
             //
-            $table->string('reference');
+            $table->string('reference')->afterColumn('project_id');
         });
     }
 

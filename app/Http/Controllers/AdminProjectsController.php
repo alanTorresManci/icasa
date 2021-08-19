@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdminProjectsController extends Controller
 {
@@ -54,9 +56,17 @@ class AdminProjectsController extends Controller
         $rules = [
             'user_id' => 'required|exists:users,id',
             'name' => 'required',
+            'image' => 'required|image',
         ];
         $request->validate($rules);
-        $project = Project::create($request->all());
+
+        $project = Project::create($request->except(['image']));
+        $name = uniqid()."_".$project->id.".".$request->file('image')->extension();
+        $path = $request->file('image')->storeAs(
+            'project_images', $name, 'public'
+        );
+        $project->image = $path;
+        $project->save();
         return redirect()->route('admin_projects.show', ['project' => $project]);
     }
 
@@ -70,6 +80,7 @@ class AdminProjectsController extends Controller
     {
         //
         $project = Project::findOrFail($id);
+
         $clients = User::whereIs('client')
                     ->orderBy('name')
                     ->get();
@@ -103,10 +114,19 @@ class AdminProjectsController extends Controller
         $rules = [
             'user_id' => 'required|exists:users,id',
             'name' => 'required',
+            'image' => 'image'
         ];
         $request->validate($rules);
         $project = Project::findOrFail($id);
-        $project->update($request->all());
+        $project->update($request->except(['image']));
+        if($request->has('image')){
+            $name = uniqid()."_".$project->id.".".$request->file('image')->extension();
+            $path = $request->file('image')->storeAs(
+                'project_images', $name, 'public'
+            );
+            $project->image = $path;
+            $project->save();
+        }
         return redirect()->route('admin_projects.show', ['project' => $project]);
 
 

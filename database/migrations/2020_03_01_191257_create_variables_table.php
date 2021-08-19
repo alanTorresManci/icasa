@@ -21,6 +21,8 @@ class CreateVariablesTable extends Migration
             $table->boolean('read_only');
             $table->boolean('write_only');
             $table->string('units');
+            $table->string('position_x')->nullable();
+            $table->string('position_y')->nullable();
             $table->timestamps();
         });
     }

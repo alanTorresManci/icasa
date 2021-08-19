@@ -17,6 +17,8 @@ class Variable extends Model
         'write_only',
         'units',
         'reference',
+        'position_x',
+        'position_y',
     ];
     public function project(){
         return $this->belongsTo(Project::class);
