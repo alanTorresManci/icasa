@@ -7,7 +7,14 @@
         height: 600px;
         background: url("{{ \Storage::url($project->image) }}");
     }
+    .item{
+        display: block !important;
+    }
+    .hotspot .icon-radio-checked{
+        display: none !important;
+    }
 </style>
+{{-- <meta http-equiv="refresh" content="5; URL={!! url()->full() !!}"> --}}
 @endsection
 
 @section('breadcrumb')
@@ -48,7 +55,8 @@
     // Items collection
         items = {!! $project->listVariableValues !!};
         var options = {
-            shareBox: false
+            shareBox: false,
+            triggerEvent: 'click'
         };
         // Plugin activation
         $(document).ready(function() {

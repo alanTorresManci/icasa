@@ -30,7 +30,7 @@ class Project extends Model
                 'description' => $variable->data->last()->value." ".$variable->units,
                 'position' => [
                         'left' => $variable->position_x,
-                        'top' => $variable->position_y,
+                        'top' => $variable->position_y - 60,
                 ]
             ];
         }
