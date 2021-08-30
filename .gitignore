@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/config/constants.php
 /public/storage
 /storage/*.key
 /vendor
